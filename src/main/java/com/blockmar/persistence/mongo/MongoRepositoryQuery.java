@@ -32,7 +32,7 @@ public class MongoRepositoryQuery<T> implements RepositoryQuery<T> {
 		return this;
 	}
 	
-	public <V> MongoRepositoryQuery<T> orderBy(String key, Order direction) {
+	public <V> MongoRepositoryQuery<T> orderBy(String key, RepositoryQuery.Order direction) {
 		if(direction == Order.DESC) {
 			key = "-" + key;
 		}
