@@ -1,6 +1,11 @@
-This is a part of a simple Object Repository implementation for Java.
+Persistence Mongo
+=================
+
+Persistence Mongo is an implemetation of Persistance Core, a simple Object Repository implementation for Java.
 This project contains the MongoDB implementation. See Persistence-Core for skeleton interfaces.
 
+License
+-------
 
 Code is licensed under the Simplified BSD License
 
