@@ -1,8 +1,29 @@
 Persistence Mongo
 =================
 
-Persistence Mongo is an implemetation of Persistance Core, a simple Object Repository implementation for Java.
+Persistence Mongo is an implementation of Persistence Core, a simple Object Repository implementation for Java.
 This project contains the MongoDB implementation. See Persistence-Core for skeleton interfaces.
+
+Building/Installing
+-------------------
+
+Persistence Mongo is build using SBT (https://github.com/harrah/xsbt/wiki). The super fast instruction:
+
+     $ sbt
+     > compile
+     > package
+     > publish-local
+
+The *publish-local* command installs the jar into your local Ivy repository. See the SBT manual for Maven instructions (hint: publishTo)
+
+### Dependencies
+
+Persistence Mongo is dependent on Persistence Core, download and build Core first.
+
+### Why SBT? Is Persistence Core dependent on Scala?
+
+No there is no dependency between the Persistence-projects and Scala. The build tolls add Scala as a dependency in the Maven pom.xml files but it is not used.
+The choice of SBT as the build tool was made because the Persistence-projects are designed to work with the Play Framework 2.0 that also uses SBT.
 
 License
 -------
