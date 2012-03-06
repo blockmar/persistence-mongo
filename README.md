@@ -20,7 +20,7 @@ The *publish-local* command installs the jar into your local Ivy repository. See
 
 Persistence Mongo is dependent on Persistence Core, download and build Core first.
 
-### Why SBT? Is Persistence Core dependent on Scala?
+### Why SBT? Is Persistence Mongo dependent on Scala?
 
 No there is no dependency between the Persistence-projects and Scala. The build tolls add Scala as a dependency in the Maven pom.xml files but it is not used.
 The choice of SBT as the build tool was made because the Persistence-projects are designed to work with the Play Framework 2.0 that also uses SBT.
