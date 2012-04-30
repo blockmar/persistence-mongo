@@ -30,7 +30,12 @@ public class MongoRepository<T, W extends MongoRepositoryObject<T>> implements
 	}
 
 	public T findById(String id) {
-		return getSource(findByIdWrapped(id));
+		try {
+			return getSource(findByIdWrapped(id));
+		} catch (IllegalArgumentException e) {
+			//An invalid ObjectId-string does not result in an exception. 
+			return null;
+		}
 	}
 	
 	public <V> RepositoryQuery<T> find(String key, V value) {
