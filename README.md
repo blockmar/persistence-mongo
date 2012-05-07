@@ -25,6 +25,19 @@ Persistence Mongo is dependent on Persistence Core, download and build Core firs
 No there is no dependency between the Persistence-projects and Scala. The build tolls add Scala as a dependency in the Maven pom.xml files but it is not used.
 The choice of SBT as the build tool was made because the Persistence-projects are designed to work with the Play Framework 2.0 that also uses SBT.
 
+Maven Repository
+----------------
+
+A SNAPSHOT-build of Persistence Mongo is available from http://hostingbyblockmar.com/maven/public/
+
+    <dependency>
+        <groupId>com.blockmar.persistence</groupId>
+        <artifactId>mongo</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+
+The POM-file incorrectly contains a dependency to *Scala* this is due to the use of SBT and not actually used.
+
 License
 -------
 
