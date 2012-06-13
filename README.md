@@ -32,7 +32,7 @@ A SNAPSHOT-build of Persistence Mongo is available from http://hostingbyblockmar
 
     <dependency>
         <groupId>com.blockmar.persistence</groupId>
-        <artifactId>mongo</artifactId>
+        <artifactId>persistence-mongo</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </dependency>
 
