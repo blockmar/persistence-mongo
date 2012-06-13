@@ -27,7 +27,7 @@ public class MongoRepositoryQueryResult<T> implements RepositoryQueryResult<T> {
 		List<T> result = new ArrayList<T>();
 		Iterator<? extends MongoRepositoryObject<T>> iterator = query.iterator();
 		
-		while (iterator.hasNext() && result.size() <= count) {
+		while (iterator.hasNext() && result.size() < count) {
 			result.add(iterator.next().get());
 		}
 		return result;
