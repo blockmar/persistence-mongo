@@ -27,6 +27,11 @@ public class MongoRepositoryQuery<T> implements RepositoryQuery<T> {
 		return new MongoRepositoryQueryResult<T>(query);
 	}
 	
+	public <V> MongoRepositoryQuery<T> offset(int offset) {
+		query = query.offset(offset);
+		return this;
+	}
+
 	public <V> MongoRepositoryQuery<T> and(String key, V value) {
 		query = query.filter(key, value);
 		return this;
