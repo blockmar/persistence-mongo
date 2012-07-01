@@ -14,6 +14,7 @@ public class MongoRepositoryQuery<T> implements RepositoryQuery<T> {
 		this.query = query;
 	}
 
+	@Override
 	public T first() {
 		Iterator<? extends MongoRepositoryObject<T>> iterator = query.iterator();
 		if(iterator.hasNext()) {
@@ -23,20 +24,24 @@ public class MongoRepositoryQuery<T> implements RepositoryQuery<T> {
 		return null;
 	}
 	
+	@Override
 	public RepositoryQueryResult<T> result() {
 		return new MongoRepositoryQueryResult<T>(query);
 	}
 	
+	@Override
 	public <V> MongoRepositoryQuery<T> offset(int offset) {
 		query = query.offset(offset);
 		return this;
 	}
 
+	@Override
 	public <V> MongoRepositoryQuery<T> and(String key, V value) {
 		query = query.filter(key, value);
 		return this;
 	}
 	
+	@Override
 	public <V> MongoRepositoryQuery<T> orderBy(String key, RepositoryQuery.Order direction) {
 		if(direction == Order.DESC) {
 			key = "-" + key;
@@ -45,6 +50,7 @@ public class MongoRepositoryQuery<T> implements RepositoryQuery<T> {
 		return this;
 	}
 	
+	@Override
 	public <V> MongoRepositoryQuery<T> orderBy(String key) {
 		return orderBy(key, Order.ASC);
 	}
