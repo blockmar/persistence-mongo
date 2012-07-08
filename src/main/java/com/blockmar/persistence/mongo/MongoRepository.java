@@ -37,6 +37,10 @@ public class MongoRepository<T, W extends MongoRepositoryObject<T>> implements
 			return null;
 		}
 	}
+
+	public <V> RepositoryQuery<T> find() {
+		return new MongoRepositoryQuery<T>(datastore.find(wrapperClazz));
+	}
 	
 	public <V> RepositoryQuery<T> find(String key, V value) {
 		return new MongoRepositoryQuery<T>(findWrapped(key, value));
