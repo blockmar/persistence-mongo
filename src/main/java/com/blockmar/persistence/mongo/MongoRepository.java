@@ -15,7 +15,7 @@ import com.google.code.morphia.query.Query;
 import com.mongodb.Mongo;
 
 public class MongoRepository<T, W extends MongoRepositoryObject<T>> implements
-		Repository<T> {
+Repository<T> {
 
 	private final Class<W> wrapperClazz;
 
@@ -29,23 +29,27 @@ public class MongoRepository<T, W extends MongoRepositoryObject<T>> implements
 		datastore = morphia.createDatastore(mongo, database);
 	}
 
+	@Override
 	public T findById(String id) {
 		try {
 			return getSource(findByIdWrapped(id));
 		} catch (IllegalArgumentException e) {
-			//An invalid ObjectId-string does not result in an exception. 
+			//An invalid ObjectId-string does not result in an exception.
 			return null;
 		}
 	}
 
+	@Override
 	public <V> RepositoryQuery<T> find() {
 		return new MongoRepositoryQuery<T>(datastore.find(wrapperClazz));
 	}
-	
+
+	@Override
 	public <V> RepositoryQuery<T> find(String key, V value) {
 		return new MongoRepositoryQuery<T>(findWrapped(key, value));
 	}
-	
+
+	@Override
 	public RepositoryQueryResult<T> findAll() {
 		return new MongoRepositoryQueryResult<T>(datastore.find(wrapperClazz));
 	}
@@ -53,7 +57,7 @@ public class MongoRepository<T, W extends MongoRepositoryObject<T>> implements
 	protected W findByIdWrapped(String id) {
 		return findByIdWrapped(new ObjectId(id));
 	}
-	
+
 	protected W findByIdWrapped(ObjectId id) {
 		Key<W> key = new Key<W>(wrapperClazz, id);
 		return findByKey(key);
@@ -69,6 +73,7 @@ public class MongoRepository<T, W extends MongoRepositoryObject<T>> implements
 		return datastore.find(wrapperClazz, key, value);
 	}
 
+	@Override
 	public T store(T object) {
 		W wrappedObject = wrapObject(object);
 		Key<W> key = store(wrappedObject);
@@ -86,7 +91,7 @@ public class MongoRepository<T, W extends MongoRepositoryObject<T>> implements
 					.getDeclaredConstructor(new Class[] { object.getClass() });
 			constructor.setAccessible(true);
 			W wrappedObject = constructor.newInstance(new Object[] { object });
-			
+
 			if(wrappedObject.id != null) {
 				W oldObject = findByIdWrapped(wrappedObject.id);
 				if(oldObject != null) {
@@ -96,7 +101,7 @@ public class MongoRepository<T, W extends MongoRepositoryObject<T>> implements
 			else {
 				wrappedObject.setCreated(new Date());
 			}
-			
+
 			return wrappedObject;
 		} catch (Exception e) {
 			e.printStackTrace();
