@@ -7,9 +7,9 @@ import com.blockmar.persistence.RepositoryQueryResult;
 import com.google.code.morphia.query.Query;
 
 public class MongoRepositoryQuery<T> implements RepositoryQuery<T> {
-	
+
 	private Query<? extends MongoRepositoryObject<T>> query;
-	
+
 	public MongoRepositoryQuery(Query<? extends MongoRepositoryObject<T>> query) {
 		this.query = query;
 	}
@@ -23,15 +23,21 @@ public class MongoRepositoryQuery<T> implements RepositoryQuery<T> {
 		}
 		return null;
 	}
-	
+
 	@Override
 	public RepositoryQueryResult<T> result() {
 		return new MongoRepositoryQueryResult<T>(query);
 	}
-	
+
 	@Override
 	public <V> MongoRepositoryQuery<T> offset(int offset) {
 		query = query.offset(offset);
+		return this;
+	}
+
+	@Override
+	public <V> MongoRepositoryQuery<T> limit(int limit) {
+		query = query.limit(limit);
 		return this;
 	}
 
@@ -40,7 +46,7 @@ public class MongoRepositoryQuery<T> implements RepositoryQuery<T> {
 		query = query.filter(key, value);
 		return this;
 	}
-	
+
 	@Override
 	public <V> MongoRepositoryQuery<T> orderBy(String key, RepositoryQuery.Order direction) {
 		if(direction == Order.DESC) {
@@ -49,7 +55,7 @@ public class MongoRepositoryQuery<T> implements RepositoryQuery<T> {
 		query = query.order(key);
 		return this;
 	}
-	
+
 	@Override
 	public <V> MongoRepositoryQuery<T> orderBy(String key) {
 		return orderBy(key, Order.ASC);
